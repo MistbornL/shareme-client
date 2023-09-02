@@ -1,8 +1,19 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdAdd, IoMdSearch } from "react-icons/io";
 
-const Navbar = ({ searchTerm, setSearchTerm, user }) => {
+interface User {
+  _id: string;
+  image: string;
+  // Add other user properties here as needed
+}
+
+interface NavbarProps {
+  searchTerm: string;
+  setSearchTerm: (searchTerm: string) => void;
+  user: User | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();
 
   if (user) {
@@ -20,7 +31,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
           />
         </div>
         <div className="flex gap-3 ">
-          <Link to={`user-profile/${user?._id}`} className="hidden md:block">
+          <Link to={`user-profile/${user._id}`} className="hidden md:block">
             <img
               src={user.image}
               alt="user-pic"
